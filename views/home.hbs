@@ -1,0 +1,16 @@
+<div>
+  <div class="description center">
+    <h1>{{description}}</h1>
+  </div>
+  <div class="current-value center">
+    <h2>{{todayRank}}</h2>
+  </div>
+  {{#if yesterdayRank}}
+    <div class="previous-value center">
+      <p>Yesterday: {{yesterdayRank}}</p>
+    </div>
+  {{/if}}
+  {{#if debugging}}
+    <p class="debugging-status">Status: {{status}}</p>
+  {{/if}}
+</div>
