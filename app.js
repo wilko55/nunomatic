@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
     layout: 'main',
     description: nuno.description,
     todayRank: nuno.currentVal,
-    yesterdayRank: nuno.previouVal,
+    yesterdayRank: nuno.previousVal,
     status: nuno.status,
     debugging: nuno.debugging,
   });
@@ -39,6 +39,11 @@ app.get('/', (req, res) => {
 app.post('/', (req, res) => {
   const { description, url, selector, debugging } = req.body;
   nuno = new Nunomatic(description, url, selector, debugging);
+  res.json({status: 200, 'current-nuno-status': nuno.status})
+});
+
+app.get('/refresh', (req, res) => {
+  nuno.updateVal();
   res.json({status: 200, 'current-nuno-status': nuno.status})
 });
 

@@ -10,7 +10,7 @@ function Nunomatic(description, url, selector, debugging) {
 
   this.description = description;
   this.currentVal = '';
-  this.previouVal = '';
+  this.previousVal = '';
   this.status = 'starting';
   this.debugging = debugging || false;
 
@@ -19,25 +19,26 @@ function Nunomatic(description, url, selector, debugging) {
       if (err) {
         this.status = 'Error: fetching url';
       }
-      this.status = 'running';
+      this.status = 'updating';
       const html = htmlParser.parse(res.body);
       if (!html) {
         this.status = 'Error: fetching html';
       }
-      const currentVal = html.querySelector(selector).rawText;
-      if (!currentVal) {
+      const newVal = html.querySelector(selector).rawText;
+      if (!newVal) {
         this.status = 'Error: selector not valid';
       }
       // streak = previousRank === currentRank ? streak + 1 : 0;
-      this.previousRank = currentVal;
-      this.currentVal = currentVal
+      this.previousVal = this.currentVal;
+      this.currentVal = newVal;
+      this.status = 'running';
     });
   }
   // get initial value
   updateVal();
 
-  cron.schedule('0 0 1 * *', () => {
-    this.updateVal();
+  cron.schedule('0 8 * * *', () => {
+    updateVal();
   });
 };
 

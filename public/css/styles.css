@@ -46,6 +46,6 @@ p {
 
 .debugging-status {
   position: absolute;
-  bottom: 0px;
-  right: 20px;
+  bottom: -20px;
+  right: 10px;
 }
