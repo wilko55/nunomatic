@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
     todayRank: nuno.currentVal,
     yesterdayRank: nuno.previouVal,
     status: nuno.status,
-    debugging: false //nuno.debugging,
+    debugging: nuno.debugging,
   });
 });
 
@@ -42,4 +42,4 @@ app.post('/', (req, res) => {
   res.json({status: 200, 'current-nuno-status': nuno.status})
 });
 
-app.listen(3009, () => console.log(`App listening on port ${3009}!`));
+app.listen(3012, () => console.log(`App listening on port ${3012}!`));
