@@ -14,7 +14,7 @@ function Nunomatic(description, url, selector, debugging) {
   this.status = 'starting';
   this.debugging = debugging || false;
 
-  updateVal = () => {
+  this.updateVal = () => {
     needle.get(url, (err, res) => {
       if (err) {
         this.status = 'Error: fetching url';
@@ -35,10 +35,10 @@ function Nunomatic(description, url, selector, debugging) {
     });
   }
   // get initial value
-  updateVal();
+  this.updateVal();
 
   cron.schedule('0 8 * * *', () => {
-    updateVal();
+    this.updateVal();
   });
 };
 
